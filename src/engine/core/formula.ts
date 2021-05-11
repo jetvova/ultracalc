@@ -19,7 +19,7 @@ export abstract class Formula {
 
     canCalculate() : boolean {
         for (var inputVar of this.inputVariables) {
-            if (!inputVar.hasVal()) { return false; }
+            if (!inputVar.canEvaluate()) { return false; }
         }
         return true;
     }

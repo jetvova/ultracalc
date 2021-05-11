@@ -7,8 +7,8 @@ export abstract class ProblemSolver {
         while (true) {
             var succeeded = false;
             for (const f of this.formulas) {
-                if (!f.outputVariable.hasVal() && f.canCalculate()) {
-                    f.outputVariable.setVal(f.calculate());
+                if (!f.outputVariable.canEvaluate() && f.canCalculate()) {
+                    f.outputVariable.setValue(f.calculate());
                     succeeded = true;
                 }
             }

@@ -35,8 +35,8 @@ class SIDE_from_SIDE_H extends Formula {
     calculate(): number {
         
         return Math.sqrt(
-            this.C.val()*this.C.val() -
-            this.B.val()*this.B.val()
+            this.C.evaluate()*this.C.evaluate() -
+            this.B.evaluate()*this.B.evaluate()
         );
     }
 }
@@ -56,8 +56,8 @@ class H_from_SIDE_SIDE extends Formula {
     calculate(): number {
         
         return Math.sqrt(
-            this.A.val()*this.A.val() +
-            this.B.val()*this.B.val()
+            this.A.evaluate()*this.A.evaluate() +
+            this.B.evaluate()*this.B.evaluate()
         );
     }
 }
