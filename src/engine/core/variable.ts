@@ -1,4 +1,5 @@
 import { Expression } from "./expression";
+import { Formula } from "./formula";
 import { Sqrt } from "./functions";
 
 export class Variable extends Expression {
@@ -28,5 +29,9 @@ export class Variable extends Expression {
 
     setValue(value: number): void {
         this.value = value;
+    }
+
+    equals(expr: Expression): Formula {
+        return new Formula(this, expr)
     }
 }

@@ -1,28 +1,24 @@
+import { Expression } from './expression';
 import { Variable } from './variable';
 
-function i(i: number) : number {
-    return 42 + i*i;
-}
-
-export function sum(a: number, b: number): number {
-    return a + b
-}
-
-export abstract class Formula {
-    inputVariables: Variable[];
+export class Formula {
+    expression: Expression;
     outputVariable: Variable;
 
-    constructor(outputVariable: Variable, inputVariables: Variable[]) {
+    constructor(outputVariable: Variable, expression: Expression) {
         this.outputVariable = outputVariable;
-        this.inputVariables = inputVariables;
+        this.expression = expression;
     }
 
-    canCalculate() : boolean {
-        for (var inputVar of this.inputVariables) {
-            if (!inputVar.canEvaluate()) { return false; }
-        }
-        return true;
+    canEvaluate() : boolean {
+        return this.expression.canEvaluate();
     }
 
-    abstract calculate(): number;
+    evaluate(): number { 
+        return this.expression.evaluate();
+    }
+
+    toString(): string {
+        return `${this.outputVariable} = ${this.expression}`;
+    }
 }
