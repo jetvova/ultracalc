@@ -1,14 +1,7 @@
 import { Formula } from "./formula";
 import { Variable } from "./variable";
 
-export class ProblemSolver {
-    variables: Variable[];
-    formulas: Formula[];    
-
-    constructor(variables: Variable[], formulas: Formula[]) {
-        this.variables = variables;
-        this.formulas = formulas;
-    }
+export abstract class ProblemSolver {
 
     solve() {
         while (true) {
@@ -25,4 +18,6 @@ export class ProblemSolver {
         }
     }
 
+    abstract get variables(): Variable[];
+    abstract get formulas(): Formula[];
 }

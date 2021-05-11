@@ -3,22 +3,20 @@ import { Variable } from "../../core/variable";
 import { ProblemSolver } from "../../core/problemSolver";
 
 export class PythagoreanSolver extends ProblemSolver {
-    public readonly A: Variable;
-    public readonly B: Variable;
-    public readonly C: Variable;
-    
-    constructor() {
-        const A = new Variable("A", "Side A of the triangle.");
-        const B = new Variable("B", "Side B of the triangle.");
-        const C = new Variable("C", "The Hypotenuse.");
-        super([A, B, C], [
-            new SIDE_from_SIDE_H(A, B, C),
-            new SIDE_from_SIDE_H(B, A, C),
-            new H_from_SIDE_SIDE(C, A, B),
-        ]);
-        this.A = A;
-        this.B = B;
-        this.C = C;
+    public readonly A = new Variable("A", "Side A of the triangle.");
+    public readonly B = new Variable("B", "Side B of the triangle.");
+    public readonly C = new Variable("C", "The Hypotenuse.");
+           
+    get variables(): Variable[] {
+        return [this.A, this.B, this.C];
+    }
+
+    get formulas(): Formula[] {
+        return [
+            new SIDE_from_SIDE_H(this.A, this.B, this.C),
+            new SIDE_from_SIDE_H(this.B, this.A, this.C),
+            new H_from_SIDE_SIDE(this.C, this.A, this.B),
+        ];
     }
 }
 
