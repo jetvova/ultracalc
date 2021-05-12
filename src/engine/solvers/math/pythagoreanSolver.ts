@@ -3,7 +3,7 @@ import { Variable } from "../../core/variable";
 import { Solver } from "../../core/solver";
 
 import { sqrt } from "../../core/functions";
-import { sub, add } from "../../core/operators";
+import { sub, add, pow } from "../../core/operators";
 
 export class PythagoreanSolver extends Solver {
     public readonly A = new Variable("A", "Side A of the triangle.");
@@ -16,9 +16,9 @@ export class PythagoreanSolver extends Solver {
 
     get formulas(): Formula[] {
         return [
-            this.A.equals(sqrt(sub(this.C.pow(2), this.B.pow(2)))),
-            this.B.equals(sqrt(sub(this.C.pow(2), this.A.pow(2)))),
-            this.C.equals(sqrt(add(this.A.pow(2), this.B.pow(2)))),
+            this.A.equals(sqrt(sub(pow(this.C, 2), pow(this.B, 2)))),
+            this.B.equals(sqrt(sub(pow(this.C, 2), pow(this.A, 2)))),
+            this.C.equals(sqrt(add(pow(this.A, 2), pow(this.B, 2)))),
         ];
     }
 }

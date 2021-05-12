@@ -1,6 +1,5 @@
 import { Expression } from "./expression";
 import { Formula } from "./formula";
-import { Sqrt } from "./functions";
 
 export class Variable extends Expression {
     private value: number | undefined;

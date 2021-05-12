@@ -9,6 +9,7 @@ export abstract class Solver {
             for (const f of this.formulas) {
                 if (!f.outputVariable.canEvaluate() && f.canEvaluate()) {
                     f.outputVariable.setValue(f.evaluate());
+                    // TODO: Check if variables don't conflict by comparing values
                     succeeded = true;
                 }
             }

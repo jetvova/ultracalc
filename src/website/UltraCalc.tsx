@@ -1,13 +1,13 @@
 import React from 'react'
+import SolverUI from './SolverUI'
+import { PythagoreanSolver } from '../engine/solvers/math/pythagoreanSolver'
 
 const UltraCalc: React.FC = () => {
-    let [message, setMessage] = React.useState<string>("Hello")
-
     return (
         <div>
-            {message}
-            <hr />
-            <input type="text" value={message} onChange={e => setMessage(e.target.value)} ></input>
+            <SolverUI
+              solver={new PythagoreanSolver}
+            />
         </div>
     )
 }
