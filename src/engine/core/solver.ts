@@ -19,6 +19,12 @@ export abstract class Solver {
         }
     }
 
+    clear() {
+        for (const v of this.variables) { 
+            v.setValue(undefined);
+        }
+    }
+
     abstract get variables(): Variable[];
     abstract get formulas(): Formula[];
 }
