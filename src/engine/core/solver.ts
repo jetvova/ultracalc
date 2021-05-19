@@ -4,11 +4,17 @@ import { Variable } from "./variable";
 export abstract class Solver {
 
     solve() {
+        for (const v of this.variables) { 
+            if (!v.given) {
+                v.value = undefined;
+            }
+        } 
+
         while (true) {
             var succeeded = false;
             for (const f of this.formulas) {
                 if (!f.outputVariable.canEvaluate() && f.canEvaluate()) {
-                    f.outputVariable.setValue(f.evaluate());
+                    f.outputVariable.value = f.evaluate();
                     // TODO: Check if variables don't conflict by comparing values
                     succeeded = true;
                 }
@@ -21,7 +27,8 @@ export abstract class Solver {
 
     clear() {
         for (const v of this.variables) { 
-            v.setValue(undefined);
+            v.value = undefined;
+            v.given = false;
         }
     }
 

@@ -1,34 +1,65 @@
-import React from 'react'
+import React, { ChangeEvent, KeyboardEvent } from 'react'
 import { Variable } from '../engine/core/variable';
 
 interface VariableBoxProps {
     variable: Variable;
     onBlur: () => void;
+    onEnter: () => void;
 }
 
 const VariableBox: React.FC<VariableBoxProps> = (props) => {
-    const { variable, onBlur } = props;
+    const { variable, onBlur, onEnter } = props;
+
+    const [ currentValue, setCurrentValue ] = React.useState<number | undefined>(variable.getValueOrUndefined());
+    const [ isGiven, setIsGiven ] = React.useState<boolean>(variable.given);
+    var checkBoxRef: HTMLInputElement | null = null;
     
-    let [ currentValue, setCurrentValue ] = React.useState<number | undefined>(variable.getValueOrUndefined());
-    variable.onChange(setCurrentValue);
+    variable.onValueChange(setCurrentValue);
+    variable.onGivenChange(setIsGiven);
+    
+    const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+        variable.given = e.target.checked;
+        if (e.target.checked) {
+            checkBoxRef!.focus();
+        }
+    }
+
+    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (!isGiven) {
+            if (e.code.startsWith("Digit")) {
+                variable.given = true;
+                variable.value = undefined;
+            }
+        }
+        if (e.key == "Enter") {
+            onEnter();
+        }
+    }
 
     return (
         <div>
-            {variable.name}
+            <label>
+                {variable.name}
+                &nbsp;
+                <input type="checkbox" checked={isGiven} onChange={handleCheckboxChange} />
+            </label>
             
             &nbsp;
-            
-            <input 
-                type="number" 
-                value={currentValue === undefined ? '' : currentValue.toString()} 
+
+            <input
+                ref={e => checkBoxRef = e}
+                type="number"
+                value={currentValue === undefined ? '' : currentValue.toString()}
                 onChange={e => {
                     let newValue: number | undefined = parseFloat(e.target.value);
                     if (isNaN(newValue)) { newValue = undefined; }
                     
-                    variable.setValue(newValue);
+                    variable.value = newValue;
                     setCurrentValue(newValue);
                 }} 
                 onBlur={e => onBlur()}
+                readOnly={!isGiven}
+                onKeyPress={handleKeyPress}
                 />
 
             &nbsp;
