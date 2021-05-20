@@ -41,7 +41,7 @@ export class Variable extends Expression {
 
     set given(given: boolean) { 
         if (given !== this._given) {
-            console.log(`Variable ${this.name} isGiven set to: ${given}`);        
+            console.log(`Variable ${this.name} given set to: ${given}`);        
             this._given = given;
             for (const c of this.onGivenChangeCallbacks) {
                 c(given);

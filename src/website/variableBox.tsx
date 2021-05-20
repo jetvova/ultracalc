@@ -41,7 +41,7 @@ const VariableBox: React.FC<VariableBoxProps> = (props) => {
             <label>
                 {variable.name}
                 &nbsp;
-                <input type="checkbox" checked={isGiven} onChange={handleCheckboxChange} />
+                <input type="checkbox" data-testid={`checkbox_${variable.name}`} checked={isGiven} onChange={handleCheckboxChange} />
             </label>
             
             &nbsp;
@@ -49,6 +49,7 @@ const VariableBox: React.FC<VariableBoxProps> = (props) => {
             <input
                 ref={e => checkBoxRef = e}
                 type="number"
+                data-testid={`textbox_${variable.name}`}
                 value={currentValue === undefined ? '' : currentValue.toString()}
                 onChange={e => {
                     let newValue: number | undefined = parseFloat(e.target.value);

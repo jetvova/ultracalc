@@ -27,14 +27,14 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
     
     for (let i = 0; i < solver.variables.length; i++) {
         const v = solver.variables[i];
-        variableBoxes.push(<VariableBox variable={v} onBlur={solve} onEnter={() => onEnter(i)} />);
+        variableBoxes.push(<VariableBox variable={v} onBlur={solve} onEnter={() => onEnter(i)} key={`box_${i}`} />);
     }
     
     return (
         <div>
             {variableBoxes}
-            <input type="button" value="Solve" onClick={e => solve()} />
-            <input type="button" value="Clear" onClick={e => clear()} />
+            <input type="button" value="Solve" data-testid={"button_solve"} onClick={e => solve()} />
+            <input type="button" value="Clear" data-testid={"button_clear"} onClick={e => clear()} />
 
         </div>
     )
