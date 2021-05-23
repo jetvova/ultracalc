@@ -17,7 +17,7 @@ export class Constant extends Expression {
         return this.value;
     }
     
-    toString(): String { 
+    toString(): string { 
         return this.value.toString();
     }
 }
