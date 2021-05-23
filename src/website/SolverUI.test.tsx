@@ -92,6 +92,14 @@ function writeToTextBox(textbox: HTMLInputElement, value: string) {
     }    
 }
 
+test("Worklog shows formulas used", async () => {
+    const { A, B, C, workLog } = renderSolverUI(new PythagoreanSolver);    
+    writeToTextBox(A, "30");
+    writeToTextBox(B, "40");
+    C.focus();
+    expect(workLog.innerHTML).toEqual("$$C = \\sqrt{{{A}^{2}}+{{B}^{2}}}$$");
+})
+
 interface PythagoreanUIControls {
     A: HTMLInputElement;
     B: HTMLInputElement;
@@ -101,6 +109,7 @@ interface PythagoreanUIControls {
     checkC: HTMLInputElement;
     solve: HTMLInputElement;
     clear: HTMLInputElement;
+    workLog: HTMLDivElement;
 }
 
 function renderSolverUI(solver: PythagoreanSolver): PythagoreanUIControls {
@@ -114,6 +123,7 @@ function renderSolverUI(solver: PythagoreanSolver): PythagoreanUIControls {
         checkC: (queryByTestId("checkbox_C") as HTMLInputElement),        
         solve: (queryByTestId("button_solve") as HTMLInputElement),
         clear: (queryByTestId("button_clear") as HTMLInputElement),
+        workLog: (queryByTestId("worklog") as HTMLDivElement),
     }
 }
 

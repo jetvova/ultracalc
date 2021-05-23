@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom';
 import { Solver } from '../engine/core/solver'
 import VariableBox from './variableBox';
@@ -9,13 +9,24 @@ interface SolverUIProps {
 
 const SolverUI: React.FC<SolverUIProps> = (props) => {
     const { solver } = props;
+
+    useEffect(() => { 
+        // Detects state changes and re-typesets equations if MathJax is loaded on the web page
+        let mj = (window as any).MathJax;
+        if (mj !== undefined) {
+            mj.typeset();
+        }            
+    })
     
     const solve = () => {
-        solver.solve();
+        const result = solver.solve();
+        setWorkLog(result);
+        return result;
     }
     
     const clear = () => {
         solver.clear();
+        setWorkLog([]);
     }
     
     const onEnter = (senderId: number) => {
@@ -23,6 +34,7 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
         solve();
     }
     
+    const [ workLog, setWorkLog ] = React.useState<string[]>([]);
     var variableBoxes: JSX.Element[] = [];
     
     for (let i = 0; i < solver.variables.length; i++) {
@@ -33,9 +45,10 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
     return (
         <div>
             {variableBoxes}
-            <input type="button" value="Solve" data-testid={"button_solve"} onClick={e => solve()} />
-            <input type="button" value="Clear" data-testid={"button_clear"} onClick={e => clear()} />
-
+            <input type="button" value="Solve" data-testid="button_solve" onClick={e => solve()} />
+            <input type="button" value="Clear" data-testid="button_clear" onClick={e => clear()} />
+            <hr />
+            <div data-testid="worklog">{workLog}</div>
         </div>
     )
 }
