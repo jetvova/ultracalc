@@ -19,7 +19,9 @@ export abstract class BinaryOperator extends Expression {
     }
 
     evaluate(): number { 
-        return this.func(this.left.evaluate(), this.right.evaluate());
+        const result = this.func(this.left.evaluate(), this.right.evaluate());
+        console.log(`${this.toString()} = ${result}`);
+        return result;
     }
 
     toString(): string { return "(" + this.left.toString() + this.symbol + this.right.toString() + ")"; };

@@ -16,8 +16,10 @@ export abstract class UnaryFunction extends Expression {
         return this.input.canEvaluate();
     }
 
-    evaluate(): number { 
-        return this.func(this.input.evaluate());
+    evaluate(): number {
+        const result = this.func(this.input.evaluate());
+        console.log(`${this.toString()} = ${result}`);
+        return result;
     }
 
     toString(): string { return this.name + "(" + this.input.toString() + ")" };

@@ -21,6 +21,7 @@ export class Variable extends Expression {
         if (this.value === undefined) {
             throw new Error("Attempt to access undefined variable " + this.name);
         } else {
+            console.log(`Variable ${this.name} = ${this.value}`);
             return this.value;
         }
     }

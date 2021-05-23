@@ -14,8 +14,12 @@ export class Formula {
         return this.expression.canEvaluate();
     }
 
-    evaluate(): number { 
-        return this.expression.evaluate();
+    evaluate(): number {
+        console.log(`Evaluating formula: ${this.outputVariable.toString()} = ${this.expression.toString()}`);
+        const result = this.expression.evaluate();
+        // console.log(`${this.outputVariable.toString()} = ${this.expression.toString()} = ${result}`);
+        console.log(`${this.outputVariable.toString()} = ${result}`);
+        return result;
     }
 
     toString(): string {

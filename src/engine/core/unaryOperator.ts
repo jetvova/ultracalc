@@ -17,7 +17,9 @@ export abstract class UnaryOperator extends Expression {
     }
 
     evaluate(): number { 
-        return this.func(this.input.evaluate());
+        const result = this.func(this.input.evaluate());
+        console.log(`${this.toString()} = ${result}`);
+        return result;
     }
 
     toString(): string { return this.symbol + this.input.toString() };

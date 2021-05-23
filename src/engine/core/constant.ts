@@ -12,8 +12,9 @@ export class Constant extends Expression {
         return true;
     } 
 
-    evaluate(): number { 
-        return this.value; 
+    evaluate(): number {
+        // console.log(`Constant: ${this.value}`);
+        return this.value;
     }
     
     toString(): String { 
