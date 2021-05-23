@@ -25,4 +25,8 @@ export class Formula {
     toString(): string {
         return `${this.outputVariable} = ${this.expression}`;
     }
+
+    toMathJax(): string {
+        return `$$${this.outputVariable.toMathJax()} = ${this.expression.toMathJax()}$$`;
+    }
 }

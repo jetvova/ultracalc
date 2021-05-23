@@ -1,6 +1,6 @@
-import { PythagoreanSolver } from './pythagoreanSolver';
+import { PythagoreanSolver } from "./pythagoreanSolver";
 
-test('A, SIDE_FROM_SIDE_H', () => {
+test("A, SIDE_FROM_SIDE_H", () => {
   var solver = new PythagoreanSolver()
   solver.C.given = true;
   solver.B.given = true;
@@ -11,7 +11,7 @@ test('A, SIDE_FROM_SIDE_H', () => {
   expect(solver.A.given).toBe(false);
 })
 
-test('B, SIDE_FROM_SIDE_H', () => {
+test("B, SIDE_FROM_SIDE_H", () => {
   var solver = new PythagoreanSolver()
   solver.C.given = true;
   solver.A.given = true;
@@ -22,7 +22,7 @@ test('B, SIDE_FROM_SIDE_H', () => {
   expect(solver.B.given).toBe(false);
 })
 
-test('C, H_FROM_SIDE_SIDE', () => {
+test("C, H_FROM_SIDE_SIDE", () => {
   var solver = new PythagoreanSolver()
   solver.A.given = true;
   solver.B.given = true;
@@ -31,4 +31,15 @@ test('C, H_FROM_SIDE_SIDE', () => {
   solver.solve();
   expect(solver.C.evaluate()).toBe(5);
   expect(solver.C.given).toBe(false);
+})
+
+test("Work is shown for HSS", () => {
+  var solver = new PythagoreanSolver()
+  solver.A.given = true;
+  solver.B.given = true;
+  solver.A.value = 3;
+  solver.B.value = 4;
+  const result = solver.solve();
+  
+  expect(result).toEqual(["$$C = \\sqrt{{{A}^{2}}+{{B}^{2}}}$$"]);
 })

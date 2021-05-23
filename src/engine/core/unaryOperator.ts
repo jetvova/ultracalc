@@ -23,4 +23,6 @@ export abstract class UnaryOperator extends Expression {
     }
 
     toString(): string { return this.symbol + this.input.toString() };
+    
+    toMathJax(): string { return this.symbol + this.input.toMathJax() };
 }

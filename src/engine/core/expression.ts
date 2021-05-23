@@ -1,5 +1,6 @@
-export abstract class Expression { 
+export abstract class Expression {
     abstract canEvaluate(): boolean;
     abstract evaluate(): number;
-    abstract toString(): String;
+    abstract toString(): string;
+    toMathJax(): string { return this.toString(); }
 }

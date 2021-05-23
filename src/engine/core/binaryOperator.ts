@@ -25,4 +25,6 @@ export abstract class BinaryOperator extends Expression {
     }
 
     toString(): string { return "(" + this.left.toString() + this.symbol + this.right.toString() + ")"; };
+
+    toMathJax(): string { return "{" + this.left.toMathJax() + "}" + this.symbol + "{" + this.right.toMathJax() + "}"; };
 }

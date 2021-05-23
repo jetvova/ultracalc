@@ -10,12 +10,14 @@ export abstract class Solver {
             }
         } 
 
+        var workLog: string[] = [];
         while (true) {
             var succeeded = false;
             for (const f of this.formulas) {
                 if (!f.outputVariable.canEvaluate() && f.canEvaluate()) {
                     f.outputVariable.value = f.evaluate();
                     // TODO: Check if variables don't conflict by comparing values
+                    workLog.push(f.toMathJax());
                     succeeded = true;
                 }
             }
@@ -23,6 +25,7 @@ export abstract class Solver {
                 break;
             }
         }
+        return workLog;
     }
 
     clear() {

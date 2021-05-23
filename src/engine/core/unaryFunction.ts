@@ -23,4 +23,6 @@ export abstract class UnaryFunction extends Expression {
     }
 
     toString(): string { return this.name + "(" + this.input.toString() + ")" };
+    
+    toMathJax(): string { return "\\" + this.name + "{" + this.input.toMathJax() + "}" };
 }
