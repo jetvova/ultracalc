@@ -112,7 +112,7 @@ test("Worklog shows formulas used", async () => {
     writeToTextBox(A, "30");
     writeToTextBox(B, "40");
     C.focus();
-    expect(workLog.innerHTML).toEqual("$$C = \\sqrt{{{A}^{2}}+{{B}^{2}}}$$");
+    expect(workLog.innerHTML).toEqual("$$C = \\sqrt{{{A}^{2}}+{{B}^{2}}} = \\sqrt{{{30}^{2}}+{{40}^{2}}} = \\sqrt{{900}+{1600}} = \\sqrt{2500} = 50$$");
 })
 
 interface PythagoreanUIControls {

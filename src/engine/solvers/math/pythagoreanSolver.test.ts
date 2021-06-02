@@ -37,9 +37,9 @@ test("Work is shown for HSS", () => {
   var solver = new PythagoreanSolver()
   solver.A.given = true;
   solver.B.given = true;
-  solver.A.value = 3;
-  solver.B.value = 4;
+  solver.A.value = 30;
+  solver.B.value = 40;
   const result = solver.solve();
   
-  expect(result).toEqual(["$$C = \\sqrt{{{A}^{2}}+{{B}^{2}}}$$"]);
+  expect(result).toEqual(["$$C = \\sqrt{{{A}^{2}}+{{B}^{2}}} = \\sqrt{{{30}^{2}}+{{40}^{2}}} = \\sqrt{{900}+{1600}} = \\sqrt{2500} = 50$$"]);
 })

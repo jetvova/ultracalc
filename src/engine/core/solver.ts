@@ -3,7 +3,7 @@ import { Variable } from "./variable";
 
 export abstract class Solver {
 
-    solve() {
+    solve(): string[] {
         for (const v of this.variables) { 
             if (!v.given) {
                 v.value = undefined;
@@ -17,7 +17,19 @@ export abstract class Solver {
                 if (!f.outputVariable.canEvaluate() && f.canEvaluate()) {
                     f.outputVariable.value = f.evaluate();
                     // TODO: Check if variables don't conflict by comparing values
-                    workLog.push(f.toMathJax());
+
+                    var equation = f.expression;
+                    var workString = `$$${f.outputVariable.toMathJax()}`;
+                    while (true) {
+                        workString += " = " + equation.toMathJax();
+                        const nextEquation = equation.simplifyInnermost();
+                        if (equation == nextEquation) { 
+                            break;
+                        }
+                        equation = nextEquation;
+                    }
+                    workLog.push(workString + "$$");
+
                     succeeded = true;
                 }
             }

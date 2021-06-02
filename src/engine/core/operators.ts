@@ -3,6 +3,7 @@ import { BinaryOperator } from "./binaryOperator";
 import { UnaryOperator } from "./unaryOperator";
 import { expr } from "./utility";
 
+// Commonly used Operators for easy access
 export class Add extends BinaryOperator { constructor(left: Expression, right: Expression) { super(left, "+", right, (arg1, arg2) => arg1 + arg2); } }
 export class Sub extends BinaryOperator { constructor(left: Expression, right: Expression) { super(left, "-", right, (arg1, arg2) => arg1 - arg2); } }
 export class Mul extends BinaryOperator { constructor(left: Expression, right: Expression) { super(left, "*", right, (arg1, arg2) => arg1 * arg2); } }

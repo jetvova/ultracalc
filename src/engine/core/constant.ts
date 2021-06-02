@@ -17,10 +17,14 @@ export class Constant extends Expression {
         return this.value;
     }
 
-    partialEvaluate(): Constant {
+    simplifyInnermost(): Expression {
         return this;
     }
-    
+
+    getNumberIfConstant(): number | undefined {
+        return this.value;
+    }
+
     toString(): string { 
         return this.value.toString();
     }

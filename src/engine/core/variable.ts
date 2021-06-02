@@ -1,3 +1,4 @@
+import { Constant } from "./constant";
 import { Expression } from "./expression";
 import { Formula } from "./formula";
 
@@ -26,8 +27,13 @@ export class Variable extends Expression {
         }
     }
     
-    partialEvaluate(): Variable { // ?? Should it return expression or Variable? If the case is the latter, should it just return "this" or variable | number?
-        return this;
+    simplifyInnermost(): Expression {
+        if (this.canEvaluate()) { 
+            return new Constant(this.value!); 
+        } 
+        else { 
+            return this; 
+        }
     }
 
     get value(): number | undefined { return this._value; }
