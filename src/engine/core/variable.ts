@@ -26,6 +26,10 @@ export class Variable extends Expression {
         }
     }
     
+    partialEvaluate(): Variable { // ?? Should it return expression or Variable? If the case is the latter, should it just return "this" or variable | number?
+        return this;
+    }
+
     get value(): number | undefined { return this._value; }
     
     set value(value: number | undefined) {

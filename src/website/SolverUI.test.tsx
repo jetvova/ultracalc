@@ -51,6 +51,21 @@ test("Variable becomes given when written", () => {
     expect(checkA.checked).toBeTruthy();
 
 })
+
+test("Does not crash when unchecked", () => {
+    const { A, B, C, checkC, solve } = renderSolverUI(new PythagoreanSolver);
+    
+    writeToTextBox(A, "30");
+    writeToTextBox(B, "40");
+    solve.click();
+    expect(C.value).toEqual("50");
+    expect(checkC.checked).toBeFalsy();
+    checkC.click();
+    expect(checkC.checked).toBeTruthy();
+    checkC.click();
+    expect(checkC.checked).toBeFalsy();
+})
+
 test("Simple evaluation call correctly when pressing button", () => {
     const { A, B, C, solve } = renderSolverUI(new PythagoreanSolver);
     writeToTextBox(A, "30");

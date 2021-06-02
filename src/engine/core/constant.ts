@@ -16,6 +16,10 @@ export class Constant extends Expression {
         // console.log(`Constant: ${this.value}`);
         return this.value;
     }
+
+    partialEvaluate(): Constant {
+        return this;
+    }
     
     toString(): string { 
         return this.value.toString();
