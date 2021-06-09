@@ -2,7 +2,6 @@ import { Formula } from "./formula";
 import { Variable } from "./variable";
 
 export abstract class Solver {
-
     solve(): string[] {
         for (const v of this.variables) { 
             if (!v.given) {
@@ -49,4 +48,9 @@ export abstract class Solver {
 
     abstract get variables(): Variable[];
     abstract get formulas(): Formula[];
+    abstract get id(): string;
+    abstract get name(): string;
+    abstract get description(): string;
+    abstract get image(): string;
+
 }

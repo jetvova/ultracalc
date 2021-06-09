@@ -44,11 +44,17 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
     
     return (
         <div>
-            {variableBoxes}
-            <input type="button" value="Solve" data-testid="button_solve" onClick={e => solve()} />
-            <input type="button" value="Clear" data-testid="button_clear" onClick={e => clear()} />
-            <hr />
-            <div data-testid="worklog">{workLog}</div>
+            <img src={solver.image} width="350px"/>
+            <h2>
+                {solver.name}
+            </h2>
+            <div>
+                {variableBoxes}
+                <input type="button" value="Solve" data-testid="button_solve" onClick={e => solve()} />
+                <input type="button" value="Clear" data-testid="button_clear" onClick={e => clear()} />
+                <hr />
+                <div data-testid="worklog">{workLog}</div>
+            </div>
         </div>
     )
 }
