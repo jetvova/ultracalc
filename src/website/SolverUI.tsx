@@ -15,7 +15,7 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
         let mj = (window as any).MathJax;
         if (mj !== undefined) {
             mj.typeset();
-        }            
+        }
     })
     
     const solve = () => {
@@ -30,7 +30,7 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
     }
     
     const onEnter = (senderId: number) => {
-        // TODO: variableBoxes[min(senderId + 1, variableBoxes.length)].focus();
+        // TODO: variableBoxes[min(senderId + 1, variableBoxes.length)].focus();, focus on the next availible textbox
         solve();
     }
     

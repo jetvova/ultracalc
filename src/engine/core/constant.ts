@@ -26,6 +26,6 @@ export class Constant extends Expression {
     }
 
     toString(): string { 
-        return this.value.toString();
+        return (Math.round((this.value + Number.EPSILON) * 10000) / 10000).toString();
     }
 }
