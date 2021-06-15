@@ -12,8 +12,8 @@ export class HorizontalThrowSolver extends Solver {
     public readonly image = `images/solvers/${this.id}.png`;
     
     public readonly Yi = new Variable("Y_i", "Initial height.");
-    public readonly Vxi = new Variable("V_{xi}", "Initial horizontal velocity.");
-    public readonly Vyf = new Variable("V_{yf}", "Final vertical velocity.");
+    public readonly Vxi = new Variable("V_xi", "Initial horizontal velocity.");
+    public readonly Vyf = new Variable("V_yf", "Final vertical velocity.");
     public readonly Xf = new Variable("X_f", "Final horizontal distance.");
     public readonly t = new Variable("t", "Time to impact.");
     public readonly g = new Variable("g", "Acceleration caused by gravity.");
