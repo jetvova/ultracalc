@@ -36,7 +36,6 @@ export class HorizontalThrowSolver extends Solver {
             this.g.equals(div(this.Vyf, this.t)),
             this.Yi.equals(mul(this.t, div(this.Vyf, 2))),
             this.Yi.equals(div(mul(this.g, pow(this.t, 2)), 2)),
-            this.t.equals(div(this.Yi, this.Vyf)),
             this.t.equals(div(this.Xf, this.Vxi)),
             this.t.equals(sqrt(div(mul(2, this.Yi), this.g))),
         ];
