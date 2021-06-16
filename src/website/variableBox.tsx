@@ -1,5 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent } from 'react'
 import { Variable } from '../engine/core/variable';
+//@ts-ignore
+import MathJax from 'react-mathjax-preview';
 
 interface VariableBoxProps {
     variable: Variable;
@@ -39,11 +41,11 @@ const VariableBox: React.FC<VariableBoxProps> = (props) => {
     return (
         <div>
             <label>
-                {variable.name}
+                <MathJax math={`$${variable.name}$`} style={{display : "inline-block", width : "30px", textAlign : "right"}} />
                 &nbsp;
                 <input type="checkbox" data-testid={`checkbox_${variable.name}`} checked={isGiven} onChange={handleCheckboxChange} />
             </label>
-            
+
             &nbsp;
 
             <input

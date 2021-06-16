@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom';
-import { Solver } from '../engine/core/solver'
+import React from 'react';
+import { Solver } from '../engine/core/solver';
 import VariableBox from './variableBox';
+//@ts-ignore
+import MathJax from 'react-mathjax-preview';
 
 interface SolverUIProps {
     solver: Solver;
@@ -9,18 +10,17 @@ interface SolverUIProps {
 
 const SolverUI: React.FC<SolverUIProps> = (props) => {
     const { solver } = props;
-
-    useEffect(() => { 
-        // Detects state changes and re-typesets equations if MathJax is loaded on the web page
-        let mj = (window as any).MathJax;
-        if (mj !== undefined) {
-            mj.typeset();
-        }
-    })
     
+    const [ workLog, setWorkLog ] = React.useState<JSX.Element[]>([]);
+    var variableBoxes: JSX.Element[] = [];
+
     const solve = () => {
         const result = solver.solve();
-        setWorkLog(result);
+        var mathJaxResult: JSX.Element[] = [];
+        for (let workString of result) {
+            mathJaxResult.push(<MathJax math={workString} style={{display : "inline-block"}} />);
+        }
+        setWorkLog(mathJaxResult);
         return result;
     }
     
@@ -33,9 +33,6 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
         // TODO: variableBoxes[min(senderId + 1, variableBoxes.length)].focus();, focus on the next availible textbox
         solve();
     }
-    
-    const [ workLog, setWorkLog ] = React.useState<string[]>([]);
-    var variableBoxes: JSX.Element[] = [];
     
     for (let i = 0; i < solver.variables.length; i++) {
         const v = solver.variables[i];
@@ -52,8 +49,10 @@ const SolverUI: React.FC<SolverUIProps> = (props) => {
                 {variableBoxes}
                 <input type="button" value="Solve" data-testid="button_solve" onClick={e => solve()} />
                 <input type="button" value="Clear" data-testid="button_clear" onClick={e => clear()} />
-                <hr />
-                <div data-testid="worklog">{workLog}</div>
+                <hr/>
+                <div>
+                    {workLog.map(math => <p>{math}</p>)}
+                </div>
             </div>
         </div>
     )
