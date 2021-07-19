@@ -1,4 +1,5 @@
 import { Expression } from "./expression";
+import { Variable } from "./variable";
 
 export class Constant extends Expression {
     value: number;
@@ -17,8 +18,21 @@ export class Constant extends Expression {
         return this.value;
     }
 
-    simplifyInnermost(): Expression {
+    solveInnermost(): Expression {
         return this;
+    }
+
+    searchFor(target: Variable): number {
+        return -2;
+    }
+
+    getChild(direction: number): Expression {
+        console.log(`Invalid child direction to go into: ${direction}`);
+        return this;
+    }
+
+    invertAndInsert(direction: number, newChild: Expression): Expression {
+        throw new Error("invertAndInsert NYI");
     }
 
     getNumberIfConstant(): number | undefined {

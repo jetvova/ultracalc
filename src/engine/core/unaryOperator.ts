@@ -1,7 +1,8 @@
 import { Constant } from "./constant";
+import { Variable } from "./variable";
 import { Expression } from "./expression";
 
-export class UnaryOperator extends Expression {
+export abstract class UnaryOperator extends Expression {
     public readonly symbol: string;
     public readonly input: Expression;
     public readonly func: (arg: number) => number;
@@ -23,11 +24,30 @@ export class UnaryOperator extends Expression {
         return result;
     }
 
-    simplifyInnermost(): Expression {
+    abstract abstractConstruct(input: Expression): Expression;
+
+    solveInnermost(): Expression {
         const result = this.input.getNumberIfConstant();
         if (result !== undefined) { return new Constant(this.func(result)); } 
         else { 
-            return new UnaryOperator(this.symbol, this.input.simplifyInnermost() as Expression, this.func); 
+            return this.abstractConstruct(this.input.solveInnermost() as Expression); 
+        }
+    }
+
+    searchFor(target: Variable): number {
+        const result = this.input.searchFor(target); 
+        if (result != -2) {
+            return 0;
+        }
+        return -2;
+    }
+
+    getChild(direction: number): Expression {
+        if (direction == 0) {
+            return this.input;
+        } else {
+            console.log(`Invalid child direction to go into: ${direction}`);
+            return this;
         }
     }
 

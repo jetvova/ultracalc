@@ -1,9 +1,10 @@
 import { Expression } from './expression';
 import { Variable } from './variable';
+import { Equation } from './equation';
 
 export class Formula {
-    expression: Expression;
     outputVariable: Variable;
+    expression: Expression;
 
     constructor(outputVariable: Variable, expression: Expression) {
         this.outputVariable = outputVariable;
@@ -20,6 +21,10 @@ export class Formula {
         // console.log(`${this.outputVariable.toString()} = ${this.expression.toString()} = ${result}`);
         console.log(`${this.outputVariable.toString()} = ${result}`);
         return result;
+    }
+
+    toEquation() {
+        return new Equation(this.outputVariable, this.expression);
     }
 
     toString(): string {

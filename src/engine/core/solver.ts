@@ -21,7 +21,7 @@ export abstract class Solver {
                     var workString = `$$${f.outputVariable.toMathJax()}`;
                     while (true) {
                         workString += " = " + equation.toMathJax();
-                        const nextEquation = equation.simplifyInnermost();
+                        const nextEquation = equation.solveInnermost();
                         if (equation == nextEquation) { 
                             break;
                         }

@@ -1,7 +1,8 @@
 import { Constant } from "./constant";
+import { Variable } from "./variable";
 import { Expression } from "./expression";
 
-export class BinaryOperator extends Expression {
+export abstract class BinaryOperator extends Expression {
     public readonly left: Expression;
     public readonly symbol: string;
     public readonly tex: string;
@@ -29,7 +30,9 @@ export class BinaryOperator extends Expression {
         return result;
     }
 
-    simplifyInnermost(): Expression {
+    abstract abstractConstruct(left: Expression, right: Expression): Expression;
+
+    solveInnermost(): Expression {
         const leftResult = this.left.getNumberIfConstant();
         if (leftResult !== undefined) { 
             const rightResult = this.right.getNumberIfConstant();    
@@ -37,7 +40,30 @@ export class BinaryOperator extends Expression {
                 return new Constant(this.func(leftResult, rightResult));
             } 
         } 
-        return new BinaryOperator(this.left.simplifyInnermost() as Expression, this.symbol, this.tex, this.right.simplifyInnermost() as Expression, this.func, this.prefixNotation); 
+        return this.abstractConstruct(this.left.solveInnermost() as Expression, this.right.solveInnermost() as Expression); 
+    }
+
+    searchFor(target: Variable): number {
+        const leftResult = this.left.searchFor(target); 
+        if (leftResult != -2) {
+            return 0;
+        }
+        const rightResult = this.right.searchFor(target); 
+        if (rightResult != -2) {
+            return 1;
+        }
+        return -2;
+    }
+
+    getChild(direction: number): Expression {
+        if (direction == 0) {
+            return this.left;
+        } else if (direction == 1) {
+            return this.right;
+        } else {
+            console.log(`Invalid child direction to go into: ${direction}`);
+            return this;
+        }
     }
 
     toString(): string { return "(" + this.left.toString() + this.symbol + this.right.toString() + ")"; };

@@ -2,8 +2,8 @@ import { Formula } from "../../core/formula";
 import { Variable } from "../../core/variable";
 import { Solver } from "../../core/solver";
 
-import { sqrt } from "../../core/functions";
-import { sub, add, pow } from "../../core/operators";
+import { add, pow } from "../../core/operators";
+import { Equation } from "../../core/equation";
 
 export class PythagoreanSolver extends Solver {
     public readonly id = "pythagorean";
@@ -20,10 +20,11 @@ export class PythagoreanSolver extends Solver {
     }
 
     get formulas(): Formula[] {
+        const pthagoreanEquation = new Equation(pow(this.C, 2), add(pow(this.A, 2), pow(this.B, 2)));
         return [
-            this.A.equals(sqrt(sub(pow(this.C, 2), pow(this.B, 2)))),
-            this.B.equals(sqrt(sub(pow(this.C, 2), pow(this.A, 2)))),
-            this.C.equals(sqrt(add(pow(this.A, 2), pow(this.B, 2)))),
+            pthagoreanEquation.solveFor(this.A)!,
+            pthagoreanEquation.solveFor(this.B)!,
+            pthagoreanEquation.solveFor(this.C)!,
         ];
     }
 }

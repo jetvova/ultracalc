@@ -27,12 +27,12 @@ export class Variable extends Expression {
         }
     }
     
-    simplifyInnermost(): Expression {
-        if (this.canEvaluate()) { 
-            return new Constant(this.value!); 
-        } 
-        else { 
-            return this; 
+    solveInnermost(): Expression {
+        if (this.canEvaluate()) {
+            return new Constant(this.value!);
+        }
+        else {
+            return this;
         }
     }
 
@@ -59,7 +59,20 @@ export class Variable extends Expression {
             }
         }
     }
-    
+
+    searchFor(target: Variable): number {
+        if (this == target) { return -1; } else { return -2 };
+    }
+
+    getChild(direction: number): Expression {
+        console.log(`Invalid child direction to go into: ${direction}`);
+        return this;
+    }
+
+    invertAndInsert(direction: number, newChild: Expression): Expression {
+        throw new Error("invertAndInsert NYI");
+    }
+
     getValueOrUndefined(): number | undefined {
         return this.value;
     }
