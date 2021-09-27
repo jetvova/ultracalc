@@ -53,8 +53,12 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-      - name: List built Docker images
-        run: docker images
+
+      - name: List 1
+        run: find /home -ls
+
+      - name: List inside matrix
+        run: docker run ${{ steps.prep.outputs.tagged_image }} find /home -ls
 
       - name: Build Ultracalc
         run: docker run ${{ steps.prep.outputs.tagged_image }} ls -la
