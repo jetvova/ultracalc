@@ -1,0 +1,15 @@
+env:
+  TEST_ENV: test
+jobs:
+  test_job:
+    name: test_job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Test print
+      run: |-
+        echo "Environment variable: ${TEST_ENV}"
+name: master
+on:
+  push:
+    branches:
+    - master
