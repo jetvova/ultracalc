@@ -46,7 +46,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker buildx build -t AAAAAAAAAA --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new --file CI/Dockerfile .      
+          docker buildx build -t aaaaaaaaa --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new --file CI/Dockerfile .      
         
       - name: Move cache
         run: |
