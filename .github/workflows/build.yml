@@ -7,6 +7,8 @@ jobs:
   build_run_docker_container:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Set up CI image name and tag
         id: prep
         run: |
@@ -52,4 +54,3 @@ jobs:
 
       - name: Run unit tests
         run: docker run ${{ steps.prep.outputs.tagged_image }} -- echo running tests
-        
