@@ -57,7 +57,7 @@ jobs:
         run: docker images
 
       - name: Build Ultracalc
-        run: docker run ${{ steps.prep.outputs.tagged_image }} -- ls -la
+        run: docker run ${{ steps.prep.outputs.tagged_image }} ls -la
 
       - name: Run unit tests
-        run: docker run ${{ steps.prep.outputs.tagged_image }} -- echo running tests
+        run: docker run ${{ steps.prep.outputs.tagged_image }} echo running tests
