@@ -55,12 +55,9 @@ jobs:
 
 
       - name: List 1
-        run: find /home -ls
+        run: find $PWD -ls
 
       - name: List inside matrix
-        run: docker run ${{ steps.prep.outputs.tagged_image }} find $PWD -ls
-
-      - name: Build Ultracalc
         run: docker run ${{ steps.prep.outputs.tagged_image }} find /home -ls
 
       - name: Run unit tests
