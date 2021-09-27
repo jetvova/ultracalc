@@ -58,7 +58,7 @@ jobs:
         run: find $PWD -ls
 
       - name: List inside matrix
-        run: docker run --rm ${{ steps.prep.outputs.tagged_image }} -v $PWD:/ultracalc --workdir /ultracalc find . -ls
+        run: docker run --rm --volume $PWD:/ultracalc --workdir /ultracalc ${{ steps.prep.outputs.tagged_image }} find . -ls
 
       - name: Run unit tests
         run: docker run --rm ${{ steps.prep.outputs.tagged_image }} echo running tests
