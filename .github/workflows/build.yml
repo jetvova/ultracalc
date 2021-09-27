@@ -46,7 +46,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker buildx build --tag ${{ steps.prep.outputs.tagged_image }} --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new --file CI/Dockerfile --output type=image,name=${{ steps.prep.outputs.tagged_image }} . 
+          docker buildx build --tag ${{ steps.prep.outputs.tagged_image }} --cache-from type=local,src=/tmp/.buildx-cache --cache-to type=local,dest=/tmp/.buildx-cache-new --file CI/Dockerfile --load . 
 
       - name: Move cache
         run: |
